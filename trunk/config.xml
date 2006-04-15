@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<config>    
+    <actions>
+        <action>
+            <name>DefaultFallback</name>
+            <type>view</type>
+            <roles></roles>
+        </action>
+
+        <action>
+            <name>MainAction</name>
+            <type>view</type>
+            <tpl>view</tpl>
+            <fallback>DefaultFallback</fallback>
+            <roles></roles>
+            <filters></filters>
+        </action>
+    </actions>
+    
+    <plugins>
+        <router class="Router" />
+        <actionFabric class="FileActionFabric" />
+        <authorization class="Authorization" />
+        <authentication class="Authentication" />
+        <smarty class="MySmarty">
+            <tpldir>c:/Dev/Wamp/www/klasa/odin.design/templates/</tpldir>
+            <compiledir>c:/Dev/Wamp/www/klasa/odin.misc/templates/compile/</compiledir>
+            <cachedir>c:/Dev/Wamp/www/klasa/odin.misc/templates/cache/</cachedir>
+            <configdir>c:/Dev/Wamp/www/klasa/odin/odin.misc/</configdir>
+        </smarty>
+        <creole class="OdinCreole">
+            <type>mysql</type>
+            <host>localhost</host>
+            <username>root</username>
+            <password></password>
+            <database></database>
+            <prefix></prefix>
+        </creole>
+        <plain class="PlainView" />
+    </plugins>
+        
+    <request match="*">
+        <action>
+            <name>MainAction</name>
+        </action>
+
+        <view>
+            <name>smarty</name>
+            <params>
+                <template>main.tpl</template>
+            </params>
+        </view>
+        <filters></filters>
+    </request>
+    
+    <i18n>
+        <method>xml</method>
+    </i18n>
+    
+    <filters>
+    	<filter name="AuthorizationFilter" />
+    	<filter name="FallbackFilter" />
+    </filters>
+           
+</config>
